@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "kid_gun_1412:item/trump_gun"
+    }
+}
