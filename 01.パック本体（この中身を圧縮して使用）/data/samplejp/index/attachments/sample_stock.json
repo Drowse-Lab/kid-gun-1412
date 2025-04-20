@@ -1,0 +1,6 @@
+{
+  "name": "samplejp.attachment.sample_stock.name",
+  "display": "samplejp:sample_stock_display",
+  "data": "samplejp:sample_stock_data",
+  "type": "stock"
+}

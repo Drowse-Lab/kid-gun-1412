@@ -1,0 +1,7 @@
+{
+  "name": "samplejp.attachment.sample_sup.name",
+  "tooltip": "samplejp.attachment.sample_sup.desc",
+  "display": "samplejp:sample_sup_display",
+  "data": "samplejp:sample_sup_data",
+  "type": "muzzle"
+}

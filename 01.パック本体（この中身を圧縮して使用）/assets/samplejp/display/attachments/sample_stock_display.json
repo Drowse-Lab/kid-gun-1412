@@ -1,0 +1,10 @@
+{
+  "model": "samplejp:attachment/sample_stock_geo",
+  "slot": "samplejp:attachment/slot/sample_stock",
+  "texture": "samplejp:attachment/uv/sample_stock",
+  "adapter": "ar_stock_adapter",
+  "sounds": {
+    "install": "tacz:attachments/attachment_general_a",
+    "uninstall": "tacz:attachments/attachment_general_uninstall"
+  }
+}

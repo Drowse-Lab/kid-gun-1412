@@ -1,0 +1,9 @@
+{
+  "model": "samplejp:attachment/sample_grip_geo",
+  "slot": "samplejp:attachment/slot/sample_grip",
+  "texture": "samplejp:attachment/uv/sample_grip",
+  "sounds": {
+    "install": "tacz:attachments/attachment_general_b",
+    "uninstall": "tacz:attachments/attachment_general_uninstall"
+  }
+}

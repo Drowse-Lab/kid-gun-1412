@@ -1,0 +1,15 @@
+{
+  "model": "samplejp:attachment/sample_scope_geo",
+  "slot": "samplejp:attachment/slot/sample_scope",
+  "texture": "samplejp:attachment/uv/sample_scope",
+  "zoom": [
+    4.0,
+    8.0
+  ],
+  "scope": true,
+  "fov": 70.0,
+  "sounds": {
+    "install": "tacz:attachments/attachment_general_b",
+    "uninstall": "tacz:attachments/attachment_general_uninstall"
+  }
+}

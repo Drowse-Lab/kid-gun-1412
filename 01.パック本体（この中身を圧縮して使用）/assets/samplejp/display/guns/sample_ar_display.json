@@ -1,0 +1,52 @@
+{
+    "model": "samplejp:gun/sample_ar_geo",
+    "texture": "samplejp:gun/uv/sample_ar",
+    "slot": "samplejp:gun/slot/sample_ar",
+    "hud": "samplejp:gun/hud/sample_ar",
+    "muzzle_flash": {
+      "texture": "tacz:flash/common_muzzle_flash",
+      "scale": 1
+    },
+    "animation": "samplejp:sample_ar",
+    "use_default_animation": "rifle",
+    "transform": {
+        "scale": {
+            "thirdperson": [
+                0.6,
+                0.6,
+                0.6
+            ],
+            "ground": [
+                0.5,
+                0.5,
+                0.5
+            ],
+            "fixed": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+  "shell": {
+    "initial_velocity": [5, 2, 1],
+    "random_velocity": [1, 1, 0.25],
+    "acceleration": [0.0, -10, 0.0],
+    "angular_velocity": [360, -1200, 90],
+    "living_time": 1.0
+  },
+    "sounds": {
+        "draw": "tacz:m4a1/m4a1_draw",
+        "put_away": "tacz:m4a1/m4a1_put_away",
+        "shoot": "tacz:m4a1/m4a1_shoot",
+        "shoot_3p": "tacz:m4a1/m4a1_shoot_3p",
+        "silence": "tacz:m4a1/m4a1_silence",
+        "silence_3p": "tacz:m4a1/m4a1_silence_3p",
+        "dry_fire": "tacz:dry_fire",
+        "reload_tactical":"samplejp:sounds/sample_ar_reload",
+        "reload_empty":"samplejp:sounds/sample_ar_reloadempty",
+        "inspect": "samplejp:sounds/sample_ar_inspect",
+        "inspect_empty": "samplejp:sounds/sample_ar_inspect"
+    },
+    "third_person_animation": "default"
+}
