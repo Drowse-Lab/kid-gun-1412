@@ -2,4 +2,6 @@
 ## model
 > https://youtu.be/yCuitw1jRPs?si=nR2UWBTzz5cHie00
 ## 中身
-https://www.youtube.com/watch?v=uEmKVhctF0s
+> https://youtube.com/watch?v=uEmKVhctF0s
+## アタッチメント
+https://youtube.com/watch?v=euET4Nu99VE&t=40s
