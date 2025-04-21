@@ -1,9 +1,9 @@
 {
-    "name": "samplejp.gun.trump_gun.name",
-    "tooltip": "samplejp.gun.trump_gun.desc",
-    "display": "samplejp:trump_gun_display",
-    "data": "samplejp:trump_gun_data",
-    "type": "pistol",
-    "item_type": "modern_kinetic",
-    "sort": 20
+  "name": "samplejp.gun.trump_gun.name",
+  "tooltip": "samplejp.gun.trump_gun.desc",
+  "display": "samplejp:trump_gun_display",
+  "data": "samplejp:trump_gun_data",
+  "type": "pistol",
+  "item_type": "modern_kinetic",
+  "sort": 20
 }
