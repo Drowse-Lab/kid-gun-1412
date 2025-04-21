@@ -1,10 +1,14 @@
 {
   "version": "1.0.0",
-  "name": "pack.samplejp.name",
-  "desc": "pack.samplejp.desc",
+  "name": "kid-gun-1412",
+  "desc": "This is a custom addon for kid-gun-1412.",
   "license": "CC BY-NC-ND 4.0",
   "author": [
-    "Skylake1008"
+    "Skylake1008",
+    "reisame(0526ngs)",
+    
   ],
-  "date": "2025-04-03"
+  "date": "2025-04-03",
+  "pack_format": 9,
+  "addon_id": "kid_gun_1412"
 }
