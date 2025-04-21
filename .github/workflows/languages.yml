@@ -1,8 +1,0 @@
-TaczAdobe:
-  type: programming
-  color: "#FF5733"
-  extensions:
-    - .tacz
-  tm_scope: source.taczadobe
-  ace_mode: text
-  language_id: TaczAdobe # 他と衝突しない適当な一意のIDを設定
