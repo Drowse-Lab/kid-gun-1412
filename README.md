@@ -1,9 +1,10 @@
 # kid-gun-1412
-## model
+## これを参考に
+### model
 > https://youtu.be/yCuitw1jRPs?si=nR2UWBTzz5cHie00
-## 中身
+### 中身
 > https://youtube.com/watch?v=uEmKVhctF0s
-## アタッチメント
+### アタッチメント
 > https://youtube.com/watch?v=euET4Nu99VE&t=40s
-# サンプルダウンロード場所
+## サンプルダウンロード場所
 > https://curseforge.com/minecraft/customization/taczbluearchive-fps-pack-jp/files/6421572
