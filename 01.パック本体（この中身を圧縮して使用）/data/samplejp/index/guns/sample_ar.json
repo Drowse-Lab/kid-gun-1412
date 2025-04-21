@@ -1,9 +1,0 @@
-{
-    "name": "samplejp.gun.sample_ar.name",
-    "tooltip": "samplejp.gun.sample_ar.desc",
-    "display": "samplejp:sample_ar_display",
-    "data": "samplejp:sample_ar_data",
-    "type": "rifle",
-    "item_type": "modern_kinetic",
-    "sort": 10
-}
