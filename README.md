@@ -1,7 +1,7 @@
 # kid-gun-1412
 ## これを参考に
 ### model
-> https://youtube/yCuitw1jRPs?si=nR2UWBTzz5cHie00
+> https://youtu.be/yCuitw1jRPs?si=nR2UWBTzz5cHie00
 ### 中身
 > https://youtube.com/watch?v=uEmKVhctF0s
 ### アタッチメント
