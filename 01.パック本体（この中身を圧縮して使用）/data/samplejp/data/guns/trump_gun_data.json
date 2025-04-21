@@ -1,0 +1,86 @@
+{
+  "ammo": "samplejp:trump_card",
+  "ammo_amount": 6,
+  "bolt": "closed_bolt",
+  "rpm": 200,
+  "bullet": {
+    "extra_damage": {
+      "armor_ignore": 0.5,
+      "head_shot_multiplier": 2.0,
+      "damage_adjust": [
+        {"distance": 10, "damage": 10},
+        {"distance": 20, "damage": 8},
+        {"distance": "infinite", "damage": 5}
+      ]
+    },
+    "life": 5,
+    "damage": 10,
+    "tracer_count_interval": 1,
+    "speed": 300,
+    "gravity": 0,
+    "knockback": 0.1,
+    "friction": 0.01,
+    "ignite": false,
+    "pierce": 1
+  },
+  "reload": {
+    "type": "single",
+    "feed": {
+      "empty": 2.0,
+      "tactical": 1.5
+    },
+    "cooldown": {
+      "empty": 1.8,
+      "tactical": 1.2
+    }
+  },
+  "draw_time": 0.25,
+  "put_away_time": 0.3,
+  "aim_time": 0.15,
+  "sprint_time": 0.25,
+  "weight": 2,
+  "fire_mode": [
+    "semi"
+  ],
+  "recoil": {
+    "pitch": [
+      {"time": 0, "value": [0.3, 0.4]},
+      {"time": 0.2, "value": [0.2, 0.3]},
+      {"time": 0.4, "value": [-0.1, -0.1]},
+      {"time": 0.6, "value": [0, 0]}
+    ],
+    "yaw": [
+      {"time": 0, "value": [-0.2, -0.1]},
+      {"time": 0.2, "value": [-0.1, 0]},
+      {"time": 0.4, "value": [0, 0]}
+    ]
+  },
+  "allow_attachment_types": [
+    "scope",
+    "extended_mag",
+    "muzzle"
+  ],
+  "extended_mag_ammo_amount": [
+    9,
+    12
+  ],
+  "melee": {
+    "distance": 1,
+    "cooldown": 0.5,
+    "default": {
+      "animation_type": "melee_stock",
+      "distance": 1,
+      "range_angle": 30,
+      "damage": 3,
+      "knockback": 0.5,
+      "prep": 0.1
+    }
+  },
+  "inaccuracy": {
+    "stand": 1.5,
+    "move": 3,
+    "sneak": 1,
+    "lie": 0.5,
+    "aim": 0.1
+  }
+}
