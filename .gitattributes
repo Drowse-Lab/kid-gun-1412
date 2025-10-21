@@ -1,3 +1,3 @@
-01.パック本体（この中身を圧縮して使用）/gunpack.meta.json linguist-language=TaczAdobe
+*.meta.json linguist-language=TaczAdobe
 *.md linguist-detectable=true
 *.json linguist-detectable=true
