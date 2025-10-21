@@ -1,3 +1,4 @@
 *.meta.json linguist-language=TaczAdobe
 *.md linguist-detectable=true
 *.json linguist-detectable=true
+*.bbmodel linguist-detectable=true
