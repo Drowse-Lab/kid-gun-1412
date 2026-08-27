@@ -2,6 +2,8 @@
 
 import copy
 import json
+import shutil
+import sys
 from pathlib import Path
 from PIL import Image, ImageEnhance
 
@@ -11,6 +13,29 @@ OUT_MODEL = ROOT / "assets/kid1412/geo_models/gun/card_gun_geo.json"
 OUT_TEXTURE = ROOT / "assets/kid1412/textures/gun/uv/card_gun.png"
 OUT_SPECULAR = ROOT / "assets/kid1412/textures/gun/uv/card_gun_s.png"
 OUT_NORMAL = ROOT / "assets/kid1412/textures/gun/uv/card_gun_n.png"
+
+
+def import_finished_model(source_dir: Path):
+    """Install a finished TaCZ model bundle supplied outside the repository."""
+    required = ["card_gun_geo.json", "card_gun.json", "card_gun.png", "card_gun_display.json"]
+    missing = [name for name in required if not (source_dir / name).is_file()]
+    if missing:
+        raise FileNotFoundError("missing model files: " + ", ".join(missing))
+    targets = {
+        "card_gun_geo.json": OUT_MODEL,
+        "card_gun.json": ROOT / "assets/kid1412/geo_models/gun/lod/card_gun.json",
+        "card_gun.png": OUT_TEXTURE,
+        "card_gun_display.json": ROOT / "assets/kid1412/display/guns/card_gun_display.json",
+    }
+    for name, target in targets.items():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source_dir / name, target)
+
+    texture = Image.open(source_dir / "card_gun.png").convert("RGBA")
+    Image.new("RGBA", texture.size, (128, 128, 255, 255)).save(OUT_NORMAL)
+    luminance = texture.convert("L").point(lambda value: 35 if value < 70 else 205)
+    specular = Image.merge("RGBA", (luminance, luminance, luminance, texture.getchannel("A")))
+    specular.save(OUT_SPECULAR)
 
 
 def cube(origin, size, uv=(384, 0), pivot=None, rotation=None):
@@ -82,4 +107,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 3 and sys.argv[1] == "--import-dir":
+        import_finished_model(Path(sys.argv[2]).expanduser().resolve())
+    else:
+        main()
