@@ -1,0 +1,57 @@
+{
+  "ammo": "kid1412:playing_card",
+  "ammo_amount": 12,
+  "bolt": "closed_bolt",
+  "rpm": 240,
+  "bullet": {
+    "bullet_amount": 1,
+    "extra_damage": {
+      "armor_ignore": 0.15,
+      "head_shot_multiplier": 1.4,
+      "damage_adjust": [
+        {"distance": 12, "damage": 7},
+        {"distance": 28, "damage": 5},
+        {"distance": "infinite", "damage": 2}
+      ]
+    },
+    "life": 4,
+    "damage": 7,
+    "tracer_count_interval": 1,
+    "speed": 105,
+    "gravity": 0.025,
+    "knockback": 0.08,
+    "friction": 0.006,
+    "ignite": false,
+    "pierce": 0
+  },
+  "reload": {
+    "type": "magazine",
+    "feed": {"empty": 2.4, "tactical": 1.9},
+    "cooldown": {"empty": 2.25, "tactical": 1.75}
+  },
+  "draw_time": 0.35,
+  "put_away_time": 0.35,
+  "aim_time": 0.18,
+  "sprint_time": 0.25,
+  "weight": 1.6,
+  "fire_mode": ["semi"],
+  "recoil": {
+    "pitch": [
+      {"time": 0, "value": [0.25, 0.35]},
+      {"time": 0.08, "value": [0.05, 0.1]},
+      {"time": 0.25, "value": [0, 0]}
+    ],
+    "yaw": [
+      {"time": 0, "value": [-0.08, 0.08]},
+      {"time": 0.25, "value": [0, 0]}
+    ]
+  },
+  "allow_attachment_types": [],
+  "inaccuracy": {
+    "stand": 0.8,
+    "move": 1.6,
+    "sneak": 0.45,
+    "lie": 0.25,
+    "aim": 0.08
+  }
+}

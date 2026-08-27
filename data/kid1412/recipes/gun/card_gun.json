@@ -1,0 +1,9 @@
+{
+  "materials": [
+    {"item": {"tag": "forge:ingots/iron"}, "count": 18},
+    {"item": {"item": "minecraft:paper"}, "count": 12},
+    {"item": {"item": "minecraft:black_dye"}, "count": 2}
+  ],
+  "result": {"type": "gun", "id": "kid1412:card_gun"},
+  "type": "tacz:gun_smith_table_crafting"
+}

@@ -1,7 +1,0 @@
-{
-  "name": "samplejp.attachment.sample_grip.name",
-  "tooltip": "samplejp.attachment.sample_grip.desc",
-  "display": "samplejp:sample_grip_display",
-  "data": "samplejp:sample_grip_data",
-  "type": "grip"
-}

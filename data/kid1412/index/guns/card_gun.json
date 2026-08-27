@@ -1,0 +1,7 @@
+{
+  "name": "kid1412.gun.card_gun.name",
+  "tooltip": "kid1412.gun.card_gun.desc",
+  "display": "kid1412:card_gun_display",
+  "data": "kid1412:card_gun_data",
+  "type": "pistol"
+}

@@ -1,9 +1,0 @@
-{
-  "model": "samplejp:attachment/sample_sup_geo",
-  "slot": "samplejp:attachment/slot/sample_sup",
-  "texture": "samplejp:attachment/uv/sample_sup",
-  "sounds": {
-    "install": "tacz:attachments/attachment_general_a",
-    "uninstall": "tacz:attachments/muzzle_general"
-  }
-}

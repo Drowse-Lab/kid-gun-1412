@@ -1,7 +1,0 @@
-{
-  "name": "samplejp.attachment.sample_scope.name",
-  "tooltip": "samplejp.attachment.sample_scope.desc",
-  "display": "samplejp:sample_scope_display",
-  "data": "samplejp:sample_scope_data",
-  "type": "scope"
-}

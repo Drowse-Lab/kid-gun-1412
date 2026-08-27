@@ -1,0 +1,13 @@
+{
+  "model": "kid1412:ammo/playing_card_geo",
+  "texture": "kid1412:ammo/uv/playing_card",
+  "slot": "kid1412:ammo/slot/playing_card",
+  "tracer_color": "#E8F4FF",
+  "transform": {
+    "scale": {
+      "thirdperson": [0.55, 0.55, 0.55],
+      "ground": [0.55, 0.55, 0.55],
+      "fixed": [0.7, 0.7, 0.7]
+    }
+  }
+}

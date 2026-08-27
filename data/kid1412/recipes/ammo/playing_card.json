@@ -1,0 +1,8 @@
+{
+  "materials": [
+    {"item": {"item": "minecraft:paper"}, "count": 8},
+    {"item": {"item": "minecraft:red_dye"}, "count": 1}
+  ],
+  "result": {"type": "ammo", "id": "kid1412:playing_card", "count": 32},
+  "type": "tacz:gun_smith_table_crafting"
+}

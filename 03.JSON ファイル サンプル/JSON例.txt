@@ -1,8 +1,0 @@
-{
-  "sample1": 30,
-  "sample2": "true",
-  "sample3": [
-    "semi",
-    "auto"
-  ]
-}
