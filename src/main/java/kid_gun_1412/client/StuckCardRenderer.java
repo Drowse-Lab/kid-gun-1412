@@ -24,6 +24,8 @@ public final class StuckCardRenderer extends EntityRenderer<StuckCardEntity> {
         pose.mulPose(Axis.YP.rotationDegrees(180 - entity.getYRot()));
         // 壁に刺さったカードは長辺を上下にした縦向きで表示する。
         pose.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
+        // 壁へ平らに貼り付けず、薄い縁から刺さって手前へ突き出す。
+        pose.mulPose(Axis.YP.rotationDegrees(90));
         // Minecraftの1ブロックを約1mとして、実物のカード63×88mmに合わせる。
         pose.scale(0.063f, 0.088f, 1f);
         PoseStack.Pose last = pose.last();

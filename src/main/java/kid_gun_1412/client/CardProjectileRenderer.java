@@ -42,8 +42,9 @@ public final class CardProjectileRenderer {
             pose.translate(x, y, z);
             pose.mulPose(Axis.YP.rotationDegrees(-bullet.getYRot()));
             pose.mulPose(Axis.XP.rotationDegrees(bullet.getXRot()));
-            // Plane is XY: 63 mm wide and 88 mm tall. Its normal follows the
-            // projectile direction, so the long edge never rolls sideways.
+            // Keep the long edge vertical, but turn the card plane 90 degrees so
+            // its thin edge—not its face—leads along the projectile direction.
+            pose.mulPose(Axis.YP.rotationDegrees(90));
             pose.scale(0.063f * open, 0.088f, 0.004f);
             PoseStack.Pose last = pose.last();
             VertexConsumer vertex = mc.renderBuffers().bufferSource().getBuffer(RenderType.entityCutout(CARD_BACK));
