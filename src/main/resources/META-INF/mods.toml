@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="kid_gun_1412"
+version="${mod_version}"
+displayName="Kid Gun 1412"
+authors="hiromichi"
+description='''怪盗キッド風のトランプ銃をTaCZへ追加するJava MOD。'''
+
+[[dependencies.kid_gun_1412]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.kid_gun_1412]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.kid_gun_1412]]
+modId="tacz"
+mandatory=true
+versionRange="[1.1.0,)"
+ordering="AFTER"
+side="BOTH"
