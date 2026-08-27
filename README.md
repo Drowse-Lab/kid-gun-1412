@@ -1,6 +1,6 @@
 # kid-gun-1412
 
-Minecraft 1.20.1 / Forge 47.3.0 / TaCZ 1.1.7向けのJava MODです。
+Minecraft 1.20.1 / Forge 47.3.0 / TaCZ 1.1.8-hotfix向けのJava MODです。
 怪盗キッド風のトランプ銃とトランプ弾薬を追加します。
 
 MODのJARにはTaCZガンパックが内蔵され、起動時にゲームディレクトリの
@@ -26,11 +26,13 @@ bash build.sh 1.2.0-rc offline
 ## 開発環境で実行
 
 ```bash
-bash run.sh offline
+bash run.sh
 ```
 
-`run.sh`はこのプロジェクト自身のForge `runClient`を起動します。ForgeGradleが
-オフラインでもアセット取得タスクを実行しないよう、`downloadAssets`を除外します。
+`run.sh`はJava 17を確認し、このプロジェクト自身のForge `runClient`を起動します。
+依存関係とMinecraftアセットを取得済みなら、`bash run.sh --offline`でも起動できます。
+オフライン実行時はForgeGradleの`downloadAssets`タスクを除外します。
+バージョンも指定する場合は、`bash run.sh 1.2.0-beta offline`のように実行します。
 
 通常のMinecraftでは、生成したJARとTaCZ本体を`mods`フォルダへ入れてください。
 

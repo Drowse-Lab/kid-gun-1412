@@ -1,6 +1,6 @@
 {
   "ammo": "kid1412:playing_card",
-  "ammo_amount": 12,
+  "ammo_amount": 6,
   "bolt": "closed_bolt",
   "rpm": 240,
   "bullet": {
@@ -16,8 +16,8 @@
     },
     "life": 4,
     "damage": 7,
-    "tracer_count_interval": 1,
-    "speed": 105,
+    "tracer_count_interval": 0,
+    "speed": 48,
     "gravity": 0.025,
     "knockback": 0.08,
     "friction": 0.006,
@@ -26,11 +26,11 @@
   },
   "reload": {
     "type": "magazine",
-    "feed": {"empty": 2.4, "tactical": 1.9},
-    "cooldown": {"empty": 2.25, "tactical": 1.75}
+    "feed": {"empty": 3.0, "tactical": 3.0},
+    "cooldown": {"empty": 3.0, "tactical": 3.0}
   },
-  "draw_time": 0.35,
-  "put_away_time": 0.35,
+  "draw_time": 0.55,
+  "put_away_time": 0.45,
   "aim_time": 0.18,
   "sprint_time": 0.25,
   "weight": 1.6,

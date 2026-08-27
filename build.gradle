@@ -15,6 +15,10 @@ minecraft {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.console.level', 'info'
+            // TaCZの配布JAR内にあるSRG名のMixin refmapを、開発環境の
+            // official mappingsへ実行時に変換する。
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', file('build/createSrgToMcp/output.srg').absolutePath
             mods { kid_gun_1412 { source sourceSets.main } }
         }
     }
@@ -26,7 +30,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
-    implementation fg.deobf('local:tacz:1.20.1-1.1.7')
+    implementation fg.deobf('local:tacz:1.20.1-1.1.8-hotfix')
 }
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
