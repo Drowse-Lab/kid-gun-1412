@@ -3,44 +3,87 @@
   "texture": "kid1412:gun/uv/card_gun",
   "lod": {
     "model": "kid1412:gun/lod/card_gun",
-    "texture": "kid1412:gun/uv/card_gun"
+    "texture": "kid1412:gun/lod/card_gun"
   },
-  "slot": "kid1412:gun/slot/card_gun",
   "hud": "kid1412:gun/hud/card_gun",
-  "animation": "kid1412:card_gun",
+  "slot": "kid1412:gun/slot/card_gun",
+  "animation": "tacz:rhino357",
   "use_default_animation": "pistol",
   "state_machine": "tacz:taurus500_state_machine",
   "player_animator_3rd": "tacz:pistol_default.player_animation",
-  "muzzle_flash": {
-    "texture": "tacz:flash/common_muzzle_flash",
-    "scale": 0.08
-  },
   "transform": {
     "scale": {
       "thirdperson": [
-        0.72,
-        0.72,
-        0.72
+        0.6,
+        0.6,
+        0.6
       ],
       "ground": [
-        0.62,
-        0.62,
-        0.62
+        0.6,
+        0.6,
+        0.6
       ],
       "fixed": [
-        0.95,
-        0.95,
-        0.95
+        1.2,
+        1.2,
+        1.2
       ]
     }
   },
+  "muzzle_flash": {
+    "texture": "tacz:flash/common_muzzle_flash",
+    "scale": 0.12
+  },
   "sounds": {
-    "draw": "tacz:glock_17/glock17_draw",
-    "put_away": "tacz:glock_17/glock17_draw",
+    "draw": "tacz:rhino357/rhino_draw",
+    "put_away": "tacz:rhino357/rhino_put_away",
     "shoot": "tacz:deagle/deagle_silence",
     "shoot_3p": "tacz:deagle/deagle_silence_3p",
-    "dry_fire": "tacz:dry_fire",
-    "reload_tactical": "tacz:glock_17/glock17_reload_tactical",
-    "reload_empty": "tacz:glock_17/glock17_reload_empty"
+    "silence": "tacz:deagle/deagle_silence",
+    "silence_3p": "tacz:deagle/deagle_silence_3p",
+    "dry_fire": "tacz:dry_fire"
+  },
+  "offhand_show": {
+    "pos": [
+      4,
+      13,
+      -2
+    ],
+    "rotate": [
+      -90,
+      -35,
+      90
+    ],
+    "scale": [
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "hotbar_show": {
+    "0": {
+      "pos": [
+        -5,
+        13,
+        -2
+      ],
+      "rotate": [
+        -90,
+        -35,
+        90
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "controllable": {
+    "semi": {
+      "low_frequency": 1,
+      "high_frequency": 1,
+      "time": 200
+    }
   }
 }

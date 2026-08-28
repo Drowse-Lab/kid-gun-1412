@@ -51,6 +51,7 @@ public final class KidGunMod {
         TABS.register(modBus);
         ENTITIES.register(modBus);
         modBus.addListener(kid_gun_1412.client.ClientRegistration::registerRenderers);
+        modBus.addListener(kid_gun_1412.client.ClientRegistration::registerItemDecorations);
         ModNetwork.register();
         MinecraftForge.EVENT_BUS.register(new CardGunEvents());
     }
