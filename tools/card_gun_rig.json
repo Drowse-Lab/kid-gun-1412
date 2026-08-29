@@ -1,0 +1,593 @@
+{
+  "identifier": "geometry.kid1412.card_gun",
+  "texture_width": 256,
+  "texture_height": 320,
+  "bones": {
+    "root": {
+      "parent": null,
+      "pivot": [
+        0,
+        7.8125,
+        2.6875
+      ]
+    },
+    "lefthand": {
+      "parent": "root",
+      "pivot": [
+        -6,
+        19,
+        0
+      ]
+    },
+    "lefthand_pos": {
+      "parent": "lefthand",
+      "pivot": [
+        0,
+        8,
+        0
+      ]
+    },
+    "righthand_and_gun": {
+      "parent": "root",
+      "pivot": [
+        0,
+        7.8125,
+        2.6875
+      ]
+    },
+    "CR": {
+      "parent": "righthand_and_gun",
+      "pivot": [
+        0,
+        7.625,
+        2
+      ]
+    },
+    "cylinder_crane": {
+      "parent": "CR",
+      "pivot": [
+        0.25,
+        8.1875,
+        1.0625
+      ]
+    },
+    "crane": {
+      "parent": "cylinder_crane",
+      "pivot": [
+        0,
+        7.3125,
+        0.75
+      ]
+    },
+    "cy_base": {
+      "parent": "cylinder_crane",
+      "pivot": [
+        0,
+        9.56406,
+        3.64961
+      ]
+    },
+    "bone5": {
+      "parent": "cy_base",
+      "pivot": [
+        0,
+        9.5625,
+        2.6875
+      ]
+    },
+    "ejector": {
+      "parent": "cy_base",
+      "pivot": [
+        0,
+        7.25161,
+        2.71212
+      ]
+    },
+    "bone11": {
+      "parent": "ejector",
+      "pivot": [
+        0,
+        9.56289,
+        3.59024
+      ]
+    },
+    "round_group2": {
+      "parent": "cy_base",
+      "pivot": [
+        0,
+        9,
+        0
+      ]
+    },
+    "round7": {
+      "parent": "round_group2",
+      "pivot": [
+        -0.46008,
+        9.29687,
+        3.14844
+      ]
+    },
+    "bone4": {
+      "parent": "round7",
+      "pivot": [
+        -0.46008,
+        9.29687,
+        3.14844
+      ]
+    },
+    "round8": {
+      "parent": "round_group2",
+      "pivot": [
+        -0.46008,
+        9.82812,
+        3.14844
+      ]
+    },
+    "bone2": {
+      "parent": "round8",
+      "pivot": [
+        -0.46008,
+        9.82813,
+        1.96875
+      ]
+    },
+    "round9": {
+      "parent": "round_group2",
+      "pivot": [
+        0,
+        10.09375,
+        3.14844
+      ]
+    },
+    "bone6": {
+      "parent": "round9",
+      "pivot": [
+        0,
+        10.09375,
+        1.96875
+      ]
+    },
+    "round10": {
+      "parent": "round_group2",
+      "pivot": [
+        0.46008,
+        9.82812,
+        3.14844
+      ]
+    },
+    "bone7": {
+      "parent": "round10",
+      "pivot": [
+        0.46008,
+        9.82813,
+        1.96875
+      ]
+    },
+    "round11": {
+      "parent": "round_group2",
+      "pivot": [
+        0.46008,
+        9.29687,
+        3.14844
+      ]
+    },
+    "bone8": {
+      "parent": "round11",
+      "pivot": [
+        0.46008,
+        9.29688,
+        1.96875
+      ]
+    },
+    "round12": {
+      "parent": "round_group2",
+      "pivot": [
+        0,
+        9.5625,
+        3.625
+      ]
+    },
+    "bone9": {
+      "parent": "round12",
+      "pivot": [
+        0,
+        9.03125,
+        1.96875
+      ]
+    },
+    "hammer": {
+      "parent": "CR",
+      "pivot": [
+        0,
+        9.875,
+        4.625
+      ]
+    },
+    "trigger": {
+      "parent": "CR",
+      "pivot": [
+        0,
+        8.35076,
+        2.73073
+      ]
+    },
+    "base_gun": {
+      "parent": "CR",
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    "gun_body": {
+      "parent": "base_gun",
+      "pivot": [
+        0.09283,
+        8.83839,
+        -4.0625
+      ]
+    },
+    "bone3": {
+      "parent": "gun_body",
+      "pivot": [
+        0,
+        8.08602,
+        -0.90391
+      ]
+    },
+    "muzzle_flash": {
+      "parent": "gun_body",
+      "pivot": [
+        0,
+        9.0312,
+        -4.8500000000000005
+      ]
+    },
+    "grip": {
+      "parent": "base_gun",
+      "pivot": [
+        0,
+        6.77115,
+        5.19553
+      ]
+    },
+    "bone16": {
+      "parent": "grip",
+      "pivot": [
+        0,
+        6.96706,
+        5.86435
+      ],
+      "rotation": [
+        7.5,
+        0,
+        0
+      ]
+    },
+    "cylinder_release": {
+      "parent": "base_gun",
+      "pivot": [
+        0,
+        9.875,
+        4.625
+      ]
+    },
+    "rear_sight": {
+      "parent": "base_gun",
+      "pivot": [
+        0,
+        10.75918,
+        3.2656
+      ]
+    },
+    "rear_sight_illuminated": {
+      "parent": "rear_sight",
+      "pivot": [
+        -0.26563,
+        10.90625,
+        3.76563
+      ]
+    },
+    "barrel": {
+      "parent": "base_gun",
+      "pivot": [
+        0,
+        9,
+        0.9375
+      ]
+    },
+    "laser_pos": {
+      "parent": "barrel",
+      "pivot": [
+        0,
+        8.3125,
+        -4.25
+      ],
+      "rotation": [
+        0,
+        0,
+        -180
+      ]
+    },
+    "bone": {
+      "parent": "barrel",
+      "pivot": [
+        0,
+        10.79325,
+        -4.60268
+      ]
+    },
+    "sight_illuminated": {
+      "parent": "bone",
+      "pivot": [
+        0,
+        10.90626,
+        -4.72656
+      ]
+    },
+    "scope_pos": {
+      "parent": "bone",
+      "pivot": [
+        0,
+        10.49638,
+        -1.10268
+      ]
+    },
+    "righthand_bullet": {
+      "parent": "righthand_and_gun",
+      "pivot": [
+        -1,
+        7,
+        5
+      ]
+    },
+    "righthand": {
+      "parent": "righthand_bullet",
+      "pivot": [
+        6,
+        19.27878,
+        -0.36891
+      ]
+    },
+    "righthand_pos": {
+      "parent": "righthand",
+      "pivot": [
+        0,
+        8.27878,
+        -0.36891
+      ]
+    },
+    "loader_and_round": {
+      "parent": "righthand_bullet",
+      "pivot": [
+        0,
+        9.84503,
+        2.78203
+      ]
+    },
+    "speed_loader": {
+      "parent": "loader_and_round",
+      "pivot": [
+        0,
+        9.84128,
+        2.95062
+      ]
+    },
+    "round_group": {
+      "parent": "loader_and_round",
+      "pivot": [
+        0,
+        9.78503,
+        2.54203
+      ]
+    },
+    "round6": {
+      "parent": "round_group",
+      "pivot": [
+        -0.04601,
+        9.81472,
+        2.85687
+      ]
+    },
+    "round5": {
+      "parent": "round_group",
+      "pivot": [
+        -0.04601,
+        9.86784,
+        2.85687
+      ]
+    },
+    "round4": {
+      "parent": "round_group",
+      "pivot": [
+        0,
+        9.89441,
+        2.85687
+      ]
+    },
+    "round3": {
+      "parent": "round_group",
+      "pivot": [
+        0.04601,
+        9.86784,
+        2.85687
+      ]
+    },
+    "round2": {
+      "parent": "round_group",
+      "pivot": [
+        0.04601,
+        9.81472,
+        2.85687
+      ]
+    },
+    "round1": {
+      "parent": "round_group",
+      "pivot": [
+        0,
+        9.84128,
+        2.90453
+      ]
+    },
+    "constraint": {
+      "parent": "root",
+      "pivot": [
+        0.025,
+        7.875,
+        3.1625
+      ]
+    },
+    "positioning": {
+      "parent": null,
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    "fixed": {
+      "parent": "positioning",
+      "pivot": [
+        0.975,
+        8.0875,
+        0.7
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ]
+    },
+    "ground": {
+      "parent": "positioning",
+      "pivot": [
+        0,
+        1.3125,
+        1.1875
+      ]
+    },
+    "thirdperson_hand": {
+      "parent": "positioning",
+      "pivot": [
+        0,
+        8.0125,
+        2.8
+      ]
+    },
+    "view": {
+      "parent": null,
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    "iron_view": {
+      "parent": "view",
+      "pivot": [
+        0,
+        11.42,
+        11
+      ]
+    },
+    "idle_view": {
+      "parent": "view",
+      "pivot": [
+        2.5,
+        12.5,
+        15
+      ],
+      "rotation": [
+        0,
+        0,
+        -2.5
+      ]
+    },
+    "refit_view": {
+      "parent": "view",
+      "pivot": [
+        15,
+        10,
+        -1
+      ],
+      "rotation": [
+        0,
+        89.9,
+        0
+      ]
+    },
+    "refit_muzzle_view": {
+      "parent": "view",
+      "pivot": [
+        9.14359,
+        9.5,
+        -13.87564
+      ],
+      "rotation": [
+        0,
+        120,
+        0
+      ]
+    },
+    "refit_scope_view": {
+      "parent": "view",
+      "pivot": [
+        7.71895,
+        14.40518,
+        9.22707
+      ],
+      "rotation": [
+        12.5,
+        32.5,
+        0
+      ]
+    },
+    "refit_extended_mag_view": {
+      "parent": "view",
+      "pivot": [
+        6.00869,
+        10.99424,
+        2.28105
+      ],
+      "rotation": [
+        0,
+        90,
+        -10
+      ]
+    },
+    "refit_laser_view": {
+      "parent": "view",
+      "pivot": [
+        6.77142,
+        9.67472,
+        -0.83107
+      ],
+      "rotation": [
+        0,
+        70,
+        -2.5
+      ]
+    },
+    "refit_grip_view": {
+      "parent": "view",
+      "pivot": [
+        8,
+        6,
+        -5
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ]
+    },
+    "camera": {
+      "parent": null,
+      "pivot": [
+        2.5,
+        12.5,
+        15
+      ]
+    }
+  }
+}

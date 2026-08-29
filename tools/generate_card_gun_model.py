@@ -42,12 +42,12 @@ ATLAS_W, ATLAS_H = 256, 320
 DRUM_Y = 9.5625          # cylinder axis, fixed by the skeleton
 CHAMBER_R = 0.5313       # exact chamber ring radius of the rhino skeleton
 BORE_Y = 9.5625 - 0.5313  # bottom chamber: lands on the box centreline
-MUZZLE_Z = -5.62
-BOX_LEN = 5.60           # the front box is ~half the body length
-BOX_BOT, BOX_TOP_Y = 7.05, 10.90
-BOX_HALF_W = 1.02
-DRUM_A = 1.02            # drum apothem: about as wide as the box, not wider
-DRUM_Z0, DRUM_Z1 = 1.20, 3.35
+MUZZLE_Z = -4.70
+BOX_LEN = 4.68           # 39.5% of overall length, per the manual
+BOX_BOT, BOX_TOP_Y = 7.42, 10.72
+BOX_HALF_W = 1.45
+DRUM_A = 1.00            # 0.47x the box height, per the manual
+DRUM_Z0, DRUM_Z1 = 1.55, 3.32
 GRIP_RAKE = 24.0
 GRIP_PIVOT = [0, 8.0, 4.90]
 
@@ -75,7 +75,9 @@ BOX_TOP = (144, 0, 56, 48)
 BOX_UNDER = (200, 0, 56, 48)
 BOX_FRONT = (0, 48, 36, 64)
 DRUM_END = (36, 48, 64, 64)       # front face: cards in the chambers
-DRUM_RATCHET = (100, 48, 64, 64)  # rear face: dark empty-looking chambers
+FRONT_FACE = (100, 48, 64, 64)    # flat muzzle plate: ring + vertical slot
+FRONT_L = (100, 48, 30, 64)       # left half, up to the slot
+FRONT_R = (134, 48, 30, 64)       # right half, past the slot
 GRIP_SIDE = (164, 48, 48, 64)
 GRIP_BACK = (212, 48, 28, 64)
 DRUM_FACET = (0, 120, 64, 32)
@@ -179,11 +181,11 @@ def build_atlas():
     d.rectangle([x + w - 18, y + 3, x + w - 18, y + h - 9], fill=STEEL_LO)   # rear seam
     d.rectangle([x + 2, y + h - 8, x + w - 3, y + h - 8], fill=STEEL_LO)     # band seam
     # engraved triangle with the four leaf clover inside it
-    tri = [(x + 34, y + 13), (x + 45, y + 33), (x + 23, y + 33)]
+    tri = [(x + 16, y + 9), (x + 27, y + 29), (x + 5, y + 29)]
     d.polygon(tri, outline=SHADOW)
-    d.polygon([(x + 34, y + 16), (x + 43, y + 32), (x + 25, y + 32)], outline=STEEL_LO)
+    d.polygon([(x + 16, y + 12), (x + 25, y + 28), (x + 7, y + 28)], outline=STEEL_LO)
     for dx, dy in ((-3, 0), (3, 0), (0, -3), (0, 3)):
-        d.ellipse([x + 34 + dx - 3, y + 27 + dy - 3, x + 34 + dx + 3, y + 27 + dy + 3],
+        d.ellipse([x + 16 + dx - 3, y + 23 + dy - 3, x + 16 + dx + 3, y + 23 + dy + 3],
                   fill=STEEL_LO, outline=SHADOW)
     screws(d, BOX_SIDE, [(6, 8), (w - 7, 8), (6, h - 13), (w - 7, h - 13)])
 
@@ -254,7 +256,24 @@ def build_atlas():
         img.paste(tile, (fx, fy))
 
     drum_face(DRUM_END, CREAM, (46, 48, 54, 255))
-    drum_face(DRUM_RATCHET, None, (30, 31, 37, 255))
+
+    # --- flat muzzle plate: engraved ring, the card slot straight through it
+    x, y, w, h = FRONT_FACE
+    brushed(img, FRONT_FACE, STEEL_HI, STEEL, rng)
+    d.rectangle([x, y, x + w - 1, y + h - 1], outline=SHADOW)
+    for cx0, cy0, cx1, cy1 in ((x, y, x + 8, y + 8), (x + w - 9, y, x + w - 1, y + 8),
+                               (x, y + h - 9, x + 8, y + h - 1),
+                               (x + w - 9, y + h - 9, x + w - 1, y + h - 1)):
+        d.line([(cx0, cy1), (cx1, cy0)], fill=STEEL_LO)          # chamfered corners
+    ccx, ccy = x + w // 2, y + 30
+    for r, col in ((21, SHADOW), (19, STEEL_LO), (16, WHITE_MET)):
+        d.ellipse([ccx - r, ccy - r, ccx + r, ccy + r], outline=col)
+    d.rectangle([ccx - 2, y + 3, ccx + 2, y + h - 4], fill=(24, 25, 30, 255))  # slot
+    d.rectangle([ccx - 1, y + 3, ccx - 1, y + h - 4], fill=(60, 63, 70, 255))
+    d.polygon([(x + 52, y + 44), (x + 58, y + 54), (x + 46, y + 54)], outline=SHADOW)
+    d.rectangle([x + 8, y + 48, x + 12, y + 56], outline=STEEL_LO)             # hook
+    d.rectangle([x + 8, y + 48, x + 15, y + 50], outline=STEEL_LO)
+    screws(d, FRONT_FACE, [(6, 14), (w - 7, 14), (6, h - 15), (w - 7, h - 15)])
 
     # --- drum flank: smooth metal with one ring seam midway ----------------
     brushed(img, DRUM_FACET, STEEL_HI, STEEL, rng, streak=3)
@@ -373,7 +392,7 @@ def build_specular(atlas):
                     fill=(v, v, v, 255))
 
     for rect in (BOX_SIDE, BOX_SIDE_L, BOX_TOP, BOX_FRONT, FRAME_SIDE, REAR_SIDE,
-                 DRUM_END, DRUM_RATCHET, DRUM_FACET, BUTT, PLATE, PLATE_L,
+                 DRUM_END, FRONT_FACE, DRUM_FACET, BUTT, PLATE, PLATE_L,
                  MEDALLION, MEDALLION_L, MUZZLE_DISC, BOX_BAND, BOX_BAND_L):
         fill(rect, 225)
     fill(BOX_UNDER, 150)
@@ -457,85 +476,77 @@ def chamber_axis(index):
 
 
 def barrel_cubes():
-    """The front box: a slab whose nose tapers through top and bottom chamfers.
+    """The front box: a wide slab ending in a flat plate with the card slot.
 
-    The manual's side view shows the muzzle end cut back at roughly 45 degrees
-    above and below, leaving a narrow front face with the bore in its middle.
+    The prop's muzzle is not a barrel: the big front face carries an engraved
+    ring, and the card leaves through a vertical slot cut straight through it.
     """
     z0 = MUZZLE_Z
-    slab_z = z0 + 1.05
-    steps = [                                   # (z start, z end, y low, y high)
-        (z0, z0 + 0.35, 8.10, 9.85),
-        (z0 + 0.35, z0 + 0.70, 7.75, 10.20),
-        (z0 + 0.70, slab_z, 7.40, 10.55),
-    ]
+    slab_z = z0 + 0.40
+    W = BOX_HALF_W
+    H = BOX_TOP_Y - BOX_BOT
+    gap = 0.11                                  # half width of the card slot
     out = [
-        cube([-BOX_HALF_W, BOX_BOT, slab_z],
-             [BOX_HALF_W * 2, BOX_TOP_Y - BOX_BOT, BOX_LEN - 1.05],
+        # main slab
+        cube([-W, BOX_BOT, slab_z], [W * 2, H, BOX_LEN - 0.40],
              {"all": sw("steel"), "east": BOX_SIDE, "west": BOX_SIDE_L,
               "up": BOX_TOP, "down": BOX_UNDER, "south": sw("steel_lo")}),
-    ]
-    for i, (za, zb, ylo, yhi) in enumerate(steps):
-        faces = {"all": sw("steel"), "east": BOX_SIDE_F, "west": BOX_SIDE_F_L,
-                 "up": sw("steel_hi"), "down": BOX_UNDER}
-        if i == 0:
-            faces["north"] = BOX_FRONT
-        out.append(cube([-BOX_HALF_W, ylo, za],
-                        [BOX_HALF_W * 2, yhi - ylo, zb - za], faces))
-    # thin 45 degree plates riding exactly on the line the steps trace
-    for sy in (1, -1):
-        y_front, y_back = (9.85, BOX_TOP_Y) if sy > 0 else (8.10, BOX_BOT)
-        cy = (y_front + y_back) / 2
-        cz = z0 + (slab_z - z0) / 2
-        ln = (slab_z - z0) * math.sqrt(2)
-        out.append(cube([-BOX_HALF_W - 0.012, cy - 0.13, cz - ln / 2],
-                        [BOX_HALF_W * 2 + 0.024, 0.26, ln],
-                        {"all": sw("steel_hi")},
-                        rotation=[45 * sy, 0, 0], pivot=[0, cy, cz]))
-    out += [
+        # dark slot floor, just wide enough to show through the gap
+        cube([-0.20, BOX_BOT + 0.08, z0 + 0.14], [0.40, H - 0.16, 0.10],
+             {"all": sw("bore")}),
+        # front half plates; the space between them is the vertical muzzle slot
+        cube([-W + 0.06, BOX_BOT + 0.05, z0], [W - 0.06 - gap, H - 0.10, 0.42],
+             {"all": sw("steel"), "north": FRONT_L, "up": sw("steel_hi"),
+              "down": sw("shadow")}),
+        cube([gap, BOX_BOT + 0.05, z0], [W - 0.06 - gap, H - 0.10, 0.42],
+             {"all": sw("steel"), "north": FRONT_R, "up": sw("steel_hi"),
+              "down": sw("shadow")}),
+        # chin under the front plate
+        cube([-W + 0.02, BOX_BOT - 0.20, z0 + 0.06], [W * 2 - 0.04, 0.46, 0.46],
+             {"all": sw("steel_lo"), "down": BOX_UNDER}),
         # raised deck at the top rear of the box
-        cube([-0.80, BOX_TOP_Y, z0 + 3.0], [1.60, 0.28, 2.40],
+        cube([-0.86, BOX_TOP_Y, z0 + 2.55], [1.72, 0.28, 2.05],
              {"all": sw("steel_hi"), "up": BOX_TOP,
               "east": sw("steel"), "west": sw("steel")}),
-        cube([-0.16, BOX_TOP_Y, z0 + 4.35], [0.32, 0.48, 0.34],
+        cube([-0.16, BOX_TOP_Y, z0 + 3.90], [0.32, 0.42, 0.32],
              {"all": sw("steel_lo"), "south": sw("shadow")}),
-        # bottom band, proud of the slab, tapering with the nose
-        cube([-1.06, BOX_BOT - 0.03, slab_z], [2.12, 0.58, BOX_LEN - 1.35],
+        # bottom band with the latched hatch, toward the front like the prop
+        cube([-(W + 0.04), BOX_BOT - 0.55, slab_z],
+             [(W + 0.04) * 2, 0.58, BOX_LEN - 0.85],
              {"all": sw("steel_lo"), "east": BOX_BAND, "west": BOX_BAND_L,
               "down": BOX_UNDER}),
-        cube([-1.02, BOX_BOT + 0.32, z0 + 0.70], [2.04, 0.50, 0.40],
-             {"all": sw("steel_lo"), "down": BOX_UNDER}),
-        cube([-0.42, BOX_BOT - 0.13, z0 + 2.35], [0.84, 0.16, 1.30],
+        cube([-0.42, BOX_BOT - 0.65, z0 + 0.95], [0.84, 0.16, 1.20],
              {"all": sw("steel_hi"), "down": BOX_UNDER}),
-        cube([-0.20, BOX_BOT - 0.19, z0 + 2.70], [0.40, 0.10, 0.55],
+        cube([-0.20, BOX_BOT - 0.71, z0 + 1.22], [0.40, 0.10, 0.52],
              {"all": sw("steel_lo")}),
         # raised side panels
-        cube([1.015, 8.20, z0 + 1.70], [0.055, 1.75, 3.05],
+        cube([W - 0.005, 8.35, z0 + 1.40], [0.055, 1.60, 2.60],
              {"all": sw("steel_hi"), "east": BOX_SIDE}),
-        cube([-1.07, 8.20, z0 + 1.70], [0.055, 1.75, 3.05],
+        cube([-(W + 0.05), 8.35, z0 + 1.40], [0.055, 1.60, 2.60],
              {"all": sw("steel_hi"), "west": BOX_SIDE_L}),
     ]
-    # chamfered long edges on the slab section only
+    # 45 degree chamfers joining the front plate to top and bottom
+    for sy in (1, -1):
+        cy = (BOX_TOP_Y - 0.04) if sy > 0 else (BOX_BOT + 0.04)
+        out.append(cube([-W - 0.01, cy - 0.08, z0 - 0.20],
+                        [W * 2 + 0.02, 0.16, 0.80],
+                        {"all": sw("steel_hi")},
+                        rotation=[45 * sy, 0, 0], pivot=[0, cy, z0 + 0.20]))
+    # vertical bevels at the front corners
+    for sx in (-1, 1):
+        out.append(cube([sx * (W - 0.10) - 0.07, BOX_BOT + 0.06, z0 - 0.14],
+                        [0.14, H - 0.12, 0.55],
+                        {"all": sw("steel_hi")},
+                        rotation=[0, -sx * 35, 0], pivot=[sx * (W - 0.10), 9.0, z0 + 0.14]))
+    # chamfered long edges on the slab section
     for sx in (-1, 1):
         for sy in (-1, 1):
-            cx = sx * (BOX_HALF_W - 0.09)
+            cx = sx * (W - 0.09)
             cy = (BOX_TOP_Y - 0.11) if sy > 0 else (BOX_BOT + 0.11)
-            ln = BOX_LEN - 1.35
+            ln = BOX_LEN - 0.90
             out.append(cube([cx - 0.15, cy - 0.15, slab_z + 0.05], [0.30, 0.30, ln],
                             {"all": sw("steel_hi")}, rotation=[0, 0, 45],
                             pivot=[cx, cy, slab_z + 0.05 + ln / 2]))
-    for cz in (slab_z + 0.45, slab_z + 1.95, slab_z + 3.40):
-        for cy in (8.05, 10.30):
-            out.append(bolt_flank(1.02, cy, cz))
-            out.append(bolt_flank(-1.07, cy, cz))
-
-    # protruding octagonal muzzle ring, centred on the narrow front face
-    ring = {"all": sw("steel_hi"), "north": sw("hidden"), "south": sw("steel_lo")}
-    out += octagon(0.62, z0 - 0.36, 0.40, ring, pivot_y=BORE_Y)
-    out += octagon(0.47, z0 - 0.46, 0.12,
-                   {"all": sw("steel_lo"), "north": sw("hidden")}, pivot_y=BORE_Y)
-    out.append(cube([-0.62, BORE_Y - 0.62, z0 - 0.37], [1.24, 1.24, 0.10],
-                    {"all": HIDDEN, "north": MUZZLE_DISC}))
     return out
 
 
@@ -544,51 +555,49 @@ def gun_body_cubes():
     rod = {"all": sw("steel_hi"), "north": sw("steel_lo"), "south": sw("steel_lo")}
     out = [
         # thin centre strap between the two rods
-        cube([-0.16, 11.02, -0.30], [0.32, 0.22, 4.60],
+        cube([-0.16, 10.52, -0.30], [0.32, 0.22, 5.35],
              {"all": sw("steel"), "up": BOX_TOP}),
-        cube([-0.36, 10.80, -0.62], [0.72, 0.56, 0.70],
+        cube([-0.38, 10.34, -0.62], [0.76, 0.52, 0.70],
              {"all": sw("steel"), "up": sw("steel_hi")}),
         # hooked step at the rear end of the rail, as drawn in the anime
-        cube([-0.38, 11.24, 3.70], [0.76, 0.30, 1.05],
+        cube([-0.38, 10.56, 4.55], [0.76, 0.28, 1.05],
              {"all": sw("steel"), "up": BOX_TOP}),
-        cube([-0.34, 11.54, 4.35], [0.68, 0.42, 0.40], {"all": sw("steel_hi")}),
-        cube([-0.34, 11.54, 3.95], [0.68, 0.20, 0.42], {"all": sw("steel_lo")}),
+        cube([-0.34, 10.82, 5.20], [0.68, 0.34, 0.40], {"all": sw("steel_hi")}),
+        cube([-0.34, 10.82, 4.80], [0.68, 0.20, 0.42], {"all": sw("steel_lo")}),
         # one solid receiver block: rail on top, grip below, no floating struts
-        cube([-0.70, 7.70, 2.95], [1.40, 3.40, 2.80],
+        cube([-0.72, 7.85, 3.30], [1.44, 2.72, 3.35],
              {"all": sw("steel"), "east": REAR_SIDE, "west": REAR_SIDE,
               "up": sw("steel_hi"), "down": sw("steel_lo")}),
-        cube([0.68, 10.10, 3.55], [0.28, 0.42, 0.42], {"all": sw("steel_lo")}),
-        cube([-0.96, 10.10, 3.55], [0.28, 0.42, 0.42], {"all": sw("steel_lo")}),
-        cube([0.705, 8.70, 3.80], [0.042, 0.45, 1.05],
+        cube([0.70, 10.00, 3.90], [0.28, 0.40, 0.42], {"all": sw("steel_lo")}),
+        cube([-0.98, 10.00, 3.90], [0.28, 0.40, 0.42], {"all": sw("steel_lo")}),
+        cube([0.725, 8.75, 4.15], [0.042, 0.42, 1.05],
              {"all": sw("steel_hi"), "east": PLATE}),
-        cube([-0.747, 8.70, 3.80], [0.042, 0.45, 1.05],
+        cube([-0.767, 8.75, 4.15], [0.042, 0.42, 1.05],
              {"all": sw("steel_hi"), "west": PLATE_L}),
-        cube([-0.60, 7.58, 0.10], [1.20, 0.62, 3.10],
+        cube([-0.62, 7.72, 0.20], [1.24, 0.58, 3.30],
              {"all": sw("steel_lo"), "down": BOX_UNDER}),
-        cube([-0.44, 7.10, 0.05], [0.88, 0.60, 0.85], {"all": sw("steel_lo")}),
-        cube([-0.44, 7.30, -0.30], [0.88, 0.72, 0.40], {"all": sw("steel_lo")},
-             rotation=[36, 0, 0], pivot=[0, 7.66, -0.10]),
-        cube([-0.11, 6.80, 1.80], [0.22, 0.90, 0.34], {"all": sw("steel_hi")},
-             rotation=[-14, 0, 0], pivot=[0, 7.66, 1.97]),
+        cube([-0.44, 7.30, 0.15], [0.88, 0.52, 0.80], {"all": sw("steel_lo")}),
+        cube([-0.44, 7.46, -0.22], [0.88, 0.66, 0.38], {"all": sw("steel_lo")},
+             rotation=[36, 0, 0], pivot=[0, 7.79, -0.03]),
+        # spine closing the daylight between box and drum dome
+        cube([-0.40, 8.55, -0.02], [0.80, 1.70, 1.20], {"all": sw("steel_lo")}),
+        cube([-0.11, 7.02, 1.95], [0.22, 0.80, 0.32], {"all": sw("steel_hi")},
+             rotation=[-14, 0, 0], pivot=[0, 7.82, 2.11]),
         # pivot pins at the bracket ends
-        cube([-0.72, 7.42, 0.18], [1.44, 0.26, 0.26], {"all": sw("steel_hi")}),
+        cube([-0.72, 7.56, 0.28], [1.44, 0.24, 0.24], {"all": sw("steel_hi")}),
     ]
     # the two long rods the anime draws running the length of the gun
     for sx in (-1, 1):
-        out += octagon(0.095, -0.62, 5.20, rod, pivot_y=11.06, centre_x=sx * 0.40)
-        out.append(cube([sx * 0.40 - 0.14, 10.86, 4.40], [0.28, 0.36, 0.34],
+        out += octagon(0.095, -0.62, 5.60, rod, pivot_y=10.56, centre_x=sx * 0.42)
+        out.append(cube([sx * 0.42 - 0.14, 10.36, 5.25], [0.28, 0.36, 0.34],
                         {"all": sw("steel_lo")}))
     # the rib fan on the rear plate, modelled rather than only painted
     for k in range(6):
         angle = -58 + k * 13
-        for x, face in ((0.695, "east"), (-0.745, "west")):
-            out.append(cube([x, 9.05, 3.40], [0.05, 0.16, 1.55],
+        for x, face in ((0.715, "east"), (-0.765, "west")):
+            out.append(cube([x, 9.15, 3.75], [0.05, 0.16, 1.55],
                             {"all": sw("steel_hi")},
                             rotation=[angle, 0, 0], pivot=[0, 10.45, 5.05]))
-    # bolts around the plate
-    for cz, cy in ((3.20, 8.00), (5.45, 8.00), (3.20, 10.80), (5.45, 10.80)):
-        out.append(bolt_flank(0.695, cy, cz))
-        out.append(bolt_flank(-0.78, cy, cz))
     return out
 
 
@@ -643,31 +652,31 @@ def chamber_card(index, z0, length):
 
 def grip_cubes():
     """Banana grip: wide at the top, narrowing into a silver butt cap."""
-    seg1 = dict(rotation=[12, 0, 0], pivot=[0, 8.00, 5.15])
-    seg2 = dict(rotation=[26, 0, 0], pivot=[0, 6.10, 5.60])
+    seg1 = dict(rotation=[14, 0, 0], pivot=[0, 8.10, 5.40])
+    seg2 = dict(rotation=[40, 0, 0], pivot=[0, 6.45, 5.95])
     out = [
-        cube([-0.68, 7.05, 3.95], [1.36, 2.00, 2.35],
+        cube([-0.70, 7.30, 4.20], [1.40, 1.95, 2.45],
              {"all": sw("steel"), "east": REAR_SIDE, "west": REAR_SIDE,
               "up": sw("steel_hi")}),
-        cube([-0.62, 5.70, 4.30], [1.24, 2.35, 2.20], GRIP, **seg1),
-        cube([-0.60, 5.78, 6.44], [1.20, 2.20, 0.26],
+        cube([-0.64, 6.05, 4.55], [1.28, 2.20, 2.25], GRIP, **seg1),
+        cube([-0.62, 6.12, 6.72], [1.24, 2.05, 0.26],
              {"all": sw("grip"), "south": GRIP_BACK}, **seg1),
-        cube([-0.54, 3.55, 4.80], [1.08, 2.75, 1.95], GRIP, **seg2),
-        cube([-0.52, 3.62, 6.69], [1.04, 2.60, 0.24],
+        cube([-0.56, 4.64, 5.30], [1.12, 2.16, 2.10], GRIP, **seg2),
+        cube([-0.54, 4.71, 7.34], [1.08, 2.01, 0.24],
              {"all": sw("grip"), "south": GRIP_BACK}, **seg2),
-        cube([-0.58, 3.24, 4.74], [1.16, 0.34, 2.07],
+        cube([-0.60, 4.34, 5.24], [1.20, 0.30, 2.22],
              {"all": sw("steel"), "down": BUTT, "up": sw("steel_lo")}, **seg2),
-        cube([0.578, 6.20, 4.85], [0.04, 0.72, 0.72],
+        cube([0.638, 6.55, 5.10], [0.04, 0.66, 0.66],
              {"all": sw("steel_hi"), "east": MEDALLION}, **seg1),
-        cube([-0.618, 6.20, 4.85], [0.04, 0.72, 0.72],
+        cube([-0.678, 6.55, 5.10], [0.04, 0.66, 0.66],
              {"all": sw("steel_hi"), "west": MEDALLION_L}, **seg1),
     ]
     # the grip's finger slots, modelled as recessed bars on both flanks
     for k in range(4):
-        out.append(cube([-0.635, 6.05 + k * 0.52, 4.45], [1.27, 0.16, 2.00],
+        out.append(cube([-0.655, 6.35 + k * 0.46, 4.70], [1.31, 0.15, 2.05],
                         {"all": sw("grip_deep")}, **seg1))
     for k in range(4):
-        out.append(cube([-0.555, 3.95 + k * 0.55, 4.95], [1.11, 0.15, 1.75],
+        out.append(cube([-0.575, 4.85 + k * 0.45, 5.45], [1.15, 0.14, 1.90],
                         {"all": sw("grip_deep")}, **seg2))
     return out
 
@@ -698,28 +707,26 @@ NEW_CUBES = {
     "bone5": drum_cubes,
     "grip": grip_cubes,
     "hammer": lambda: [
-        cube([-0.20, 11.28, 4.55], [0.40, 0.58, 0.62], {"all": sw("steel_hi")},
-             rotation=[-22, 0, 0], pivot=[0, 11.28, 4.68]),
-        cube([-0.14, 11.00, 4.50], [0.28, 0.36, 0.60], {"all": sw("steel_lo")}),
-        cube([-0.16, 11.80, 4.62], [0.32, 0.12, 0.34], {"all": sw("steel_lo")},
-             rotation=[-22, 0, 0], pivot=[0, 11.28, 4.68]),
+        cube([-0.20, 10.50, 5.40], [0.40, 0.46, 0.58], {"all": sw("steel_hi")},
+             rotation=[-22, 0, 0], pivot=[0, 10.62, 5.53]),
+        cube([-0.14, 10.36, 5.35], [0.28, 0.32, 0.56], {"all": sw("steel_lo")}),
+        cube([-0.16, 10.86, 5.47], [0.32, 0.12, 0.30], {"all": sw("steel_lo")},
+             rotation=[-22, 0, 0], pivot=[0, 10.62, 5.53]),
     ],
     "trigger": lambda: [
-        cube([-0.09, 6.60, 1.72], [0.18, 0.80, 0.30], {"all": sw("steel_hi")},
-             rotation=[-16, 0, 0], pivot=[0, 7.40, 1.87]),
+        cube([-0.09, 6.95, 1.88], [0.18, 0.72, 0.28], {"all": sw("steel_hi")},
+             rotation=[-16, 0, 0], pivot=[0, 7.67, 2.02]),
     ],
     "crane": lambda: [
-        cube([-0.62, 7.35, 1.70], [0.18, 0.30, 2.10], {"all": sw("steel_hi")},
-             rotation=[22, 0, 0], pivot=[-0.53, 7.80, 2.90]),
-        cube([-0.64, 7.55, 3.35], [0.22, 0.40, 0.40], {"all": sw("steel_lo")}),
-        cube([-0.63, 7.20, 1.55], [0.20, 0.26, 0.34], {"all": sw("steel_lo")},
-             rotation=[22, 0, 0], pivot=[-0.53, 7.80, 2.90]),
+        cube([-0.64, 7.52, 1.95], [0.18, 0.28, 2.10], {"all": sw("steel_hi")},
+             rotation=[22, 0, 0], pivot=[-0.55, 7.94, 3.15]),
+        cube([-0.66, 7.70, 3.60], [0.22, 0.38, 0.40], {"all": sw("steel_lo")}),
+        cube([-0.65, 7.40, 1.80], [0.20, 0.24, 0.32], {"all": sw("steel_lo")},
+             rotation=[22, 0, 0], pivot=[-0.55, 7.94, 3.15]),
     ],
     "ejector": lambda: [],
     "bone11": lambda: [],
-    "cylinder_release": lambda: [
-        cube([-0.42, 11.02, 0.55], [0.16, 0.32, 0.70], {"all": sw("steel_hi")}),
-    ],
+    "cylinder_release": lambda: [],
     "bone": lambda: [],
     # the speed loader body is gone; the reload is a bare fan of cards
     "speed_loader": lambda: [],
@@ -756,7 +763,7 @@ def build_geometry():
     # the front sight tab is taller than the Rhino's; lift the aim line over it
     bones["iron_view"]["pivot"][1] = 11.42
     # the bore sits at the top chamber now; neither bone is animated
-    bones["muzzle_flash"]["pivot"] = [0, BORE_Y, MUZZLE_Z - 0.5]
+    bones["muzzle_flash"]["pivot"] = [0, BORE_Y, MUZZLE_Z - 0.15]
     return model
 
 
@@ -847,7 +854,12 @@ def main():
     for path in (OUT_MODEL, OUT_TEX, OUT_DISPLAY, OUT_ANIM):
         path.parent.mkdir(parents=True, exist_ok=True)
 
-    OUT_MODEL.write_text(json.dumps(build_geometry(), ensure_ascii=False, indent=2) + "\n")
+    if OUT_MODEL.exists() and "--reset" not in sys.argv:
+        print(f"model {OUT_MODEL.relative_to(ROOT)}  (hand-edited file kept; "
+              "pass --reset to regenerate the shape)")
+    else:
+        OUT_MODEL.write_text(json.dumps(build_geometry(), ensure_ascii=False, indent=2) + "\n")
+        print(f"model {OUT_MODEL.relative_to(ROOT)}  (regenerated)")
     OUT_DISPLAY.write_text(json.dumps(build_display(), ensure_ascii=False, indent=2) + "\n")
     OUT_ANIM.parent.mkdir(parents=True, exist_ok=True)
     OUT_ANIM.write_text(json.dumps(build_animation(), ensure_ascii=False, indent=2) + "\n")
@@ -857,7 +869,6 @@ def main():
     build_specular(atlas).save(OUT_TEX_S)
     Image.new("RGBA", atlas.size, (128, 128, 255, 255)).save(OUT_TEX_N)
 
-    print(f"model {OUT_MODEL.relative_to(ROOT)}")
     print(f"anim  {OUT_ANIM.relative_to(ROOT)}")
     print(f"disp  {OUT_DISPLAY.relative_to(ROOT)}")
     print(f"uv    {OUT_TEX.relative_to(ROOT)} {atlas.size}")

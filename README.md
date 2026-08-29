@@ -41,6 +41,34 @@ bash run.sh
 編集元はリポジトリ直下の`assets/`、`data/`、`gunpack.meta.json`です。
 Gradleの`buildGunPack`タスクがこれらをZIP化し、Java MODのJARへ自動内蔵します。
 
+### トランプ銃の形を手で直す（推奨ワークフロー）
+
+銃の形の正本は `assets/kid1412/geo_models/gun/card_gun_geo.json` の1ファイルです。
+Blockbenchの「Open Model」でそのまま開けます（テクスチャは
+`assets/kid1412/textures/gun/uv/card_gun.png` を読み込む）。
+
+```bash
+# 編集して保存したら1回実行（リグ修復 + HUDアイコン再生成 + パック反映）
+python3 tools/apply_model.py
+
+# 保存のたびに自動で反映
+python3 tools/apply_model.py --watch
+```
+
+`apply_model.py` は編集ミスを自動修復します:
+
+- 消したり名前を変えたボーンを復元（TaCZのアニメーションが全ボーンを要求するため）
+- ボーンのピボット・親子・回転をアニメーション用リグ（`tools/card_gun_rig.json`）に強制復帰
+  — **キューブ（形そのもの）は編集どおり残ります**
+- サイズ0のキューブを削除、identifier・テクスチャサイズを復元
+
+反映先は `run/tacz/kid_gun_1412.zip` です。起動中の開発クライアントなら
+`/tacz reload` で読み直せます（効かない場合は再起動）。`bash run.sh` での
+再起動時はGradleが編集済みassetsを自動で再梱包するので、何もしなくても反映されます。
+
+注意: 消したボーンは「空」で復元されます。弾のカード（round1〜6, round7〜12）を
+消してしまった場合は、他のroundボーンのキューブをBlockbenchでコピーしてください。
+
 ### トランプ銃のモデル生成
 
 トランプ銃はTaCZ標準のRhino .357を改造して作ります。ボーン構成・ピボット・
@@ -49,9 +77,16 @@ Gradleの`buildGunPack`タスクがこれらをZIP化し、Java MODのJARへ自�
 差し替えるのは見た目だけで、原作のトランプ銃に合わせた角ばった銀のマガジンボックス、
 6室のシリンダー、リブ入りの黒グリップを作り直しています。
 
+モデルファイルが既にある場合、生成スクリプトは**手編集を守るため形を上書きしません**
+（テクスチャ・display・アニメーションだけ再生成します）。形をゼロから作り直すときだけ
+`--reset` を付けます。
+
 ```bash
-# モデル / UVテクスチャ / LOD / display JSON を生成
+# テクスチャ / display / アニメーションを再生成（形は保持）
 python3 tools/generate_card_gun_model.py
+
+# 形も含めて全部作り直す（手編集は消えます）
+python3 tools/generate_card_gun_model.py --reset
 
 # 生成したモデルを3Dレンダリングして弾薬HUD用テクスチャにする
 python3 tools/render_gun_icon.py
